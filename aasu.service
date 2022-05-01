@@ -1,0 +1,21 @@
+[Unit]
+Description=Arch Linux and python pip automatic update service
+Requires=network.target
+After=network.target
+#StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=
+ExecStart=/usr/bin/aasu
+
+[Timer]
+Persistent=true  # execute job if it missed a run due to machine being off
+OnBootSec=120  # run 120 seconds after boot for the first time
+OnUnitActiveSec=1h  # run every 1 hour thereafter
+Unit=aasu.service  # file describing job to execute
+
+[Install]
+WantedBy=multi-user.target
