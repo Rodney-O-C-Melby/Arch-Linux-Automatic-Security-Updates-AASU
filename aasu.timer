@@ -5,7 +5,7 @@ Requires=aasu.service
 
 [Timer]
 Persistent=true
-OnBootSec=300
+#OnBootSec=300
 OnUnitActiveSec=1h
 Unit=aasu.service
 
