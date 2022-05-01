@@ -10,20 +10,26 @@ if sed 's/^User=.*/User='$username'/g' aasu.service > aasu.test ; then # add use
 else
     echo "Failed to add user to the service file!"
 fi
+#if sudo cp aasu.test /usr/lib/systemd/system/aasu.service ; then # copy service to systemd for hourly run
 if sudo cp aasu.test /usr/lib/systemd/system/aasu.service ; then # copy service to systemd for hourly run
     echo "Creating aasu service ..."
 else
     echo "Failed to create aasu service!"
 fi
+if sudo cp aasu.timer /usr/lib/systemd/system/aasu.timer ; then # copy service to systemd for hourly run
+    echo "Creating aasu service ..."
+else
+    echo "Failed to create aasu service!"
+fi
 rm -rf aasu.test  # remove file used to add user to service
-if sudo systemctl enable aasu ; then  # enable aasu service
-    echo "Enabled aasu service."
+if sudo systemctl enable aasu.timer ; then  # enable aasu service
+    echo "Enabled aasu service timer."
 else
-    echo "Failed to enable aasu service."
+    echo "Failed to enable aasu service timer."
 fi
-if sudo systemctl start aasu ; then  # start aasu service
-    echo "Started aasu service."
-else
-    echo "Failed to start aasu service."
-fi
+#if sudo systemctl start aasu.timer ; then  # start aasu service
+#    echo "Started aasu service."
+#else
+#    echo "Failed to start aasu service."
+#fi
 echo "Successfully Installed Arch-Linux Automatic Security Updates (AASU) :-)"

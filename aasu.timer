@@ -1,0 +1,13 @@
+# aasu timer
+[Unit]
+Description=Hourly package update for system-wide packages
+Requires=aasu.service
+
+[Timer]
+Persistent=true
+OnBootSec=300
+OnUnitActiveSec=1h
+Unit=aasu.service
+
+[Install]
+WantedBy=timers.target
