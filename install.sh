@@ -17,9 +17,9 @@ else
     echo "Failed to create aasu service!"
 fi
 if sudo cp aasu.timer /usr/lib/systemd/system/aasu.timer ; then # copy service to systemd for hourly run
-    echo "Creating aasu service ..."
+    echo "Creating aasu timer ..."
 else
-    echo "Failed to create aasu service!"
+    echo "Failed to create aasu timer!"
 fi
 rm -rf aasu.test  # remove file used to add user to service
 if sudo systemctl enable aasu.timer ; then  # enable aasu service
