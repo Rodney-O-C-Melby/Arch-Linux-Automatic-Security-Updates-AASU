@@ -9,7 +9,9 @@ else
 fi
 # upgrade out of date pip packages, piping output to null, with info, and success/error messages.
 echo Updating Pythons PIP Packages ...
-if pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U > /dev/null ; then
+#if pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U > /dev/null ; then
+if [ pip freeze > /tmp/requirements.txt && pip install -r /tmp/requirements.txt --upgrade ] ; then
+    rm -rf /tmp/requirements.txt
     echo "Updated python pip packages :-)"
 else
     echo "Error: failed to update python pip packages"
